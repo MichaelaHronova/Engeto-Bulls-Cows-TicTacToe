@@ -26,19 +26,47 @@ while True:
     secret_number = str(random.randint(1000,9999))
     if check_unique_digits(secret_number): 
         break
+print(secret_number)
+
+guess_number_count = 0
 
 while True:
-    number = input(">>> ")
-    if not number.isnumeric():
+    guess_number = input(">>> ")
+    if not guess_number.isnumeric():
         print("The value has to be a number. Please, try again.")
         continue
-    if number[0] == "0":
+    if guess_number[0] == "0":
         print("The number cannot start with zero. Please, try again.")
         continue
-    if len(number) != 4:
+    if len(guess_number) != 4:
         print("The number must contain 4 digits. Please, try again.")
         continue
-    if not check_unique_digits(number):
+    if not check_unique_digits(guess_number):
         print ("The number cannot contain duplicities. Please, try again.")
         continue
+    guess_number_count += 1
+    
+    # Vyhodnoceni tipu uzivatele
+    
+    if guess_number == secret_number:
+        print(f"Correct, you've guessed the right number in {guess_number_count} guesses!")
+        break
+   
+    bulls_count = 0
+    for i in range(0, len(guess_number)):
+        if guess_number[i] == secret_number[i]:
+            bulls_count += 1
+    print(f"{bulls_count=}")
+
+    cows_count = 0
+    for digit in guess_number:
+        if digit in secret_number:
+            cows_count += 1
+    cows_count -= bulls_count
+    print(f"{cows_count=}")
+
+    
+
+
+
 
