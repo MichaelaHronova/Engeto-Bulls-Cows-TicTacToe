@@ -16,7 +16,7 @@ Enter a number:
 -----------------------------------------------""")
 
 def check_unique_digits(string: str) -> bool:
-    """kontrola unikatnosti secret_number""" #docstring
+    """returns True if there are no duplicities""" #docstring
     if len(string) == len(set(string)):
         return True
     else: 
@@ -26,7 +26,6 @@ while True:
     secret_number = str(random.randint(1000,9999))
     if check_unique_digits(secret_number): 
         break
-print(secret_number)
 
 guess_number_count = 0
 
@@ -45,7 +44,7 @@ while True:
         print ("The number cannot contain duplicities. Please, try again.")
         continue
     guess_number_count += 1
-    
+
     # Vyhodnoceni tipu uzivatele
     
     if guess_number == secret_number:
@@ -56,14 +55,22 @@ while True:
     for i in range(0, len(guess_number)):
         if guess_number[i] == secret_number[i]:
             bulls_count += 1
-    print(f"{bulls_count=}")
-
+    if bulls_count != 1:
+        bull_string = f"{bulls_count} bulls"
+    else:
+        bull_string = f"{bulls_count} bull"
+    
     cows_count = 0
     for digit in guess_number:
         if digit in secret_number:
             cows_count += 1
     cows_count -= bulls_count
-    print(f"{cows_count=}")
+    if cows_count != 1:
+        cow_string = f"{cows_count} cows"
+    else:
+        cow_string = f"{cows_count} cow"
+    
+    print(f"{bull_string}, {cow_string}")
 
     
 
