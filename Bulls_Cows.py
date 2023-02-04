@@ -6,11 +6,15 @@ discord: Míša H.#5316
 '''
 
 import random
+import time 
 
 print("""Hi there!
 -----------------------------------------------
 I've generated a random 4 digit number for you.
 Let's play a bulls and cows game.
+-----------------------------------------------
+Bull = correct number, correct position.
+Cow = correct number, wrong position.
 -----------------------------------------------
 Enter a number:
 -----------------------------------------------""")
@@ -23,11 +27,12 @@ def check_unique_digits(string: str) -> bool:
         return False
 
 while True:
-    secret_number = str(random.randint(1000,9999))
+    secret_number = str(random.randint(1000, 9999))
     if check_unique_digits(secret_number): 
         break
 
 guess_number_count = 0
+start_time = time.time()
 
 while True:
     guess_number = input(">>> ")
@@ -49,6 +54,16 @@ while True:
     
     if guess_number == secret_number:
         print(f"Correct, you've guessed the right number in {guess_number_count} guesses!")
+        guess_time = time.time() - start_time
+        guess_time_minutes = guess_time // 60
+        guess_time_seconds = guess_time % 60
+        print(f"Total time: {guess_time_minutes:.0f} m {guess_time_seconds:.0f} s")
+        if guess_number_count <= 6:
+            print ("You're awesome! :)")
+        elif guess_number_count <= 9:
+            print ("Good job! :)")
+        else:
+            print ("It will be better next time. Try again! :)")
         break
    
     bulls_count = 0
